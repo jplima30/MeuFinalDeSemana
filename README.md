@@ -2,9 +2,9 @@
 
 O objetivo do app é ajudar os utilizadores a organizar e coordenar eventos e tarefas de fim de semana com amigos e família.
 
-Principais Funcionalidades:
+# Principais Funcionalidades:
 
-# Gestão de Eventos: 
+## Gestão de Eventos: 
 O utilizador pode visualizar eventos categorizados (como "Festa", "Games", "Serviços", "Rotina") numa cronologia de fim de semana (Sábado e Domingo).
 Colaboração Financeira ("Vaquinha"): Uma das principais características é a capacidade de adicionar contribuições financeiras para eventos (como um churrasco), simulando pagamentos via PIX com geração de QR Code e código "Copia e Cola".
 
