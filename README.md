@@ -1,6 +1,6 @@
 # MeuFinalDeSemana
 
-O objetivo do app é ajudar os utilizadores a organizar e coordenar eventos e tarefas de fim de semana com amigos e família.
+O app tek o objetivo de ajudar os utilizadores a organizar e coordenar eventos e tarefas de fim de semana de sua rotina, pois são muitas vezes elas que passam despercebidas e tem ym impacto grande no início da sua semana.
 
 # Principais Funcionalidades:
 
