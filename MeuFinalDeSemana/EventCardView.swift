@@ -17,16 +17,79 @@ struct EventCardView: View {
     let progress: Double? // Opcional (pode ser nil)
 
     var body: some View {
-        // 2. Um layout simples só para testar se os dados chegam
-        VStack {
-            Image(systemName: icon)
-            Text(title)
-                .font(.headline)
-            Text(time)
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top) {
+                // Ícone estilizado
+                ZStack {
+                    Circle()
+                        .fill(Color.blue.opacity(0.1))
+                        .frame(width: 44, height: 44)
+                    Image(systemName: icon)
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(.blue)
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                    
+                    Text(category)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                // Badge de tempo
+                Text(time)
+                    .font(.caption)
+                    .fontWeight(.bold)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(8)
+            }
+            
+            HStack {
+                Label("\(peopleCount) pessoas", systemImage: "person.2.fill")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
+                Spacer()
+                
+                if let progress = progress {
+                    Text("\(Int(progress * 100))%")
+                        .font(.caption)
+                        .bold()
+                        .foregroundColor(.blue)
+                }
+            }
+            
+            // Barra de Progresso (se existir)
+            if let progress = progress {
+                GeometryReader { geometry in
+                    ZStack(alignment: .leading) {
+                        Capsule()
+                            .fill(Color.gray.opacity(0.2))
+                            .frame(height: 6)
+                        
+                        Capsule()
+                            .fill(Color.blue)
+                            .frame(width: geometry.size.width * CGFloat(progress), height: 6)
+                    }
+                }
+                .frame(height: 6)
+            }
         }
-        .padding()
-        .background(Color.gray.opacity(0.2)) // Só para ver o tamanho
-        .cornerRadius(12)
+        .padding(16)
+        .background(Color(.systemBackground))
+        .cornerRadius(16)
+        .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.gray.opacity(0.1), lineWidth: 1)
+        )
     }
 }
 
