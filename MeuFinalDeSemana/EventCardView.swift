@@ -15,6 +15,7 @@ struct EventCardView: View {
     let category: String
     let peopleCount: Int
     let progress: Double? // Opcional (pode ser nil)
+    var color: Color = .blue // Valor padrão para não quebrar inicializações existentes se houver
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -22,11 +23,11 @@ struct EventCardView: View {
                 // Ícone estilizado
                 ZStack {
                     Circle()
-                        .fill(Color.blue.opacity(0.1))
+                        .fill(color.opacity(0.1))
                         .frame(width: 44, height: 44)
                     Image(systemName: icon)
                         .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(.blue)
+                        .foregroundColor(color)
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
@@ -62,7 +63,7 @@ struct EventCardView: View {
                     Text("\(Int(progress * 100))%")
                         .font(.caption)
                         .bold()
-                        .foregroundColor(.blue)
+                        .foregroundColor(color)
                 }
             }
             
@@ -75,7 +76,7 @@ struct EventCardView: View {
                             .frame(height: 6)
                         
                         Capsule()
-                            .fill(Color.blue)
+                            .fill(color)
                             .frame(width: geometry.size.width * CGFloat(progress), height: 6)
                     }
                 }
@@ -101,6 +102,7 @@ struct EventCardView: View {
         time: "14:00",
         category: "Lazer",
         peopleCount: 5,
-        progress: 0.7
+        progress: 0.7,
+        color: .red
     )
 }
