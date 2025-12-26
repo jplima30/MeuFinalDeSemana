@@ -16,6 +16,7 @@ struct EventCardView: View {
     let peopleCount: Int
     let progress: Double? // Opcional (pode ser nil)
     var color: Color = .blue // Valor padrão para não quebrar inicializações existentes se houver
+    var progressColor: Color = .green // Nova cor para a barra de progresso
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -63,7 +64,7 @@ struct EventCardView: View {
                     Text("\(Int(progress * 100))%")
                         .font(.caption)
                         .bold()
-                        .foregroundColor(color)
+                        .foregroundColor(progressColor)
                 }
             }
             
@@ -76,7 +77,7 @@ struct EventCardView: View {
                             .frame(height: 6)
                         
                         Capsule()
-                            .fill(color)
+                            .fill(progressColor)
                             .frame(width: geometry.size.width * CGFloat(progress), height: 6)
                     }
                 }
