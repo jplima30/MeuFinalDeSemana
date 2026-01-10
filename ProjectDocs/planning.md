@@ -14,10 +14,11 @@ Este arquivo armazena o estado atual do projeto e o roteiro de implementação p
 - [x] **Definir Modelo de Dados (`Event`)**
     - Estrutura para suportar polimorfismo visual (Custo, Progresso, Descrição).
     - Suporte a Categorias com cores distintas.
-    - [ ] Refatorar `EventCardView` para usar o novo modelo. <--- PRÓXIMO PASSO
+    - [x] Refatorar `EventCardView` para usar o novo modelo.
 - [ ] Criar Lista de Eventos (`ContentView`)
-    - Agrupamento por Data (Seções: "Sábado", "Domingo").
-    - Adaptação do Design (Dark Mode, Navigation Bar customizada).
+    - [x] Implementação básica com ScrollView e novos Cards.
+    - [ ] Agrupamento por Data (Seções: "Sábado", "Domingo").
+    - [ ] Adaptação do Design (Dark Mode, Navigation Bar customizada).
 
 ### 2. Detalhes e Navegação (Planejado)
 - [ ] Criar tela de detalhes do evento.
