@@ -8,15 +8,7 @@
 import SwiftUI
 
 struct EventCardView: View {
-    // 1. Aqui declaramos o que o card PRECISA receber
-    let title: String
-    let icon: String
-    let time: String
-    let category: String
-    let peopleCount: Int
-    let progress: Double? // Opcional (pode ser nil)
-    var color: Color = .blue // Valor padrão para não quebrar inicializações existentes se houver
-    var progressColor: Color = .green // Nova cor para a barra de progresso
+    let event: Event
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -24,19 +16,19 @@ struct EventCardView: View {
                 // Ícone estilizado
                 ZStack {
                     Circle()
-                        .fill(color.opacity(0.1))
+                        .fill(event.type.badgeColor.opacity(0.1))
                         .frame(width: 44, height: 44)
-                    Image(systemName: icon)
+                    Image(systemName: event.icon)
                         .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(color)
+                        .foregroundColor(event.type.badgeColor)
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(title)
+                    Text(event.title)
                         .font(.headline)
                         .foregroundColor(.primary)
                     
-                    Text(category)
+                    Text(event.category)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -44,7 +36,7 @@ struct EventCardView: View {
                 Spacer()
                 
                 // Badge de tempo
-                Text(time)
+                Text(event.time)
                     .font(.caption)
                     .fontWeight(.bold)
                     .padding(.horizontal, 8)
@@ -54,22 +46,33 @@ struct EventCardView: View {
             }
             
             HStack {
-                Label("\(peopleCount) pessoas", systemImage: "person.2.fill")
+                Label("\(event.peopleCount) pessoas", systemImage: "person.2.fill")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 
                 Spacer()
                 
-                if let progress = progress {
-                    Text("\(Int(progress * 100))%")
+                // Lógica de exibição baseada no tipo de evento
+                switch event.type {
+                case .party(_, let current):
+                     // Exemplo simplificado, idealmente calcularia % da meta
+                    Text("R$ \(Int(current))")
                         .font(.caption)
                         .bold()
-                        .foregroundColor(progressColor)
+                        .foregroundColor(event.type.badgeColor)
+                case .service(let cost):
+                    Text("R$ \(Int(cost))")
+                        .font(.caption)
+                        .bold()
+                        .foregroundColor(.primary)
+                case .social:
+                    EmptyView()
                 }
             }
             
-            // Barra de Progresso (se existir)
-            if let progress = progress {
+            // Barra de Progresso (apenas para Party por enquanto)
+            if case .party(let goal, let current) = event.type {
+                let progress = current / goal
                 GeometryReader { geometry in
                     ZStack(alignment: .leading) {
                         Capsule()
@@ -77,7 +80,7 @@ struct EventCardView: View {
                             .frame(height: 6)
                         
                         Capsule()
-                            .fill(progressColor)
+                            .fill(event.type.badgeColor)
                             .frame(width: geometry.size.width * CGFloat(progress), height: 6)
                     }
                 }
@@ -95,15 +98,29 @@ struct EventCardView: View {
     }
 }
 
-// 3. O Preview vai reclamar, então precisamos passar dados de teste
+// 3. Preview atualizado
 #Preview {
-    EventCardView(
-        title: "Churrasco",
-        icon: "flame.fill",
-        time: "14:00",
-        category: "Lazer",
-        peopleCount: 5,
-        progress: 0.7,
-        color: .red
-    )
+    VStack {
+        EventCardView(event: Event(
+            title: "Churrasco",
+            icon: "flame.fill",
+            time: "14:00",
+            category: "Lazer",
+            peopleCount: 15,
+            type: .party(goal: 500, current: 350),
+            dateSection: "Sábado"
+        ))
+        
+        EventCardView(event: Event(
+            title: "Futebol",
+            icon: "sportscourt.fill",
+            time: "10:00",
+            category: "Esporte",
+            peopleCount: 12,
+            type: .social,
+            dateSection: "Domingo"
+        ))
+    }
+    .padding()
+    .background(Color(.secondarySystemBackground))
 }
