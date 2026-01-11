@@ -17,7 +17,7 @@ Este arquivo armazena o estado atual do projeto e o roteiro de implementação p
     - [x] Refatorar `EventCardView` para usar o novo modelo.
 - [ ] Criar Lista de Eventos (`ContentView`)
     - [x] Implementação básica com ScrollView e novos Cards.
-    - [ ] Agrupamento por Data (Seções: "Sábado", "Domingo").
+    - [x] Agrupamento por Data (Seções: "Sábado", "Domingo").
     - [ ] Adaptação do Design (Dark Mode, Navigation Bar customizada).
 
 ### 2. Detalhes e Navegação (Planejado)
