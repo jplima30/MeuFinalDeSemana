@@ -49,16 +49,24 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            // Background geral (Cinza claro)
-            Color(UIColor.secondarySystemBackground)
+            // Background geral (Cinza claro para agrupar)
+            Color(.systemGroupedBackground)
                 .ignoresSafeArea()
             
             ScrollView {
-                // Header (Título)
+                // Header (Título + Data)
                 HStack {
-                    Text("Meus Eventos")
-                        .font(.largeTitle)
-                        .bold()
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(Date().formatted(.dateTime.weekday(.wide).day().month()))
+                            .font(.subheadline)
+                            .bold()
+                            .textCase(.uppercase)
+                            .foregroundColor(.secondary)
+                        
+                        Text("Meus Eventos")
+                            .font(.largeTitle)
+                            .bold()
+                    }
                     Spacer()
                 }
                 .padding(.horizontal)
